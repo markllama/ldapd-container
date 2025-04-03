@@ -1,0 +1,5 @@
+# Ignore emacs backup files
+*~
+
+# ignore working directory
+workdir
