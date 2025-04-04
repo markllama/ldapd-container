@@ -241,8 +241,9 @@ function copy_etc() {
 
     local etc_from=${unpack_root}/${package}/etc
     local etc_to=${model_root}/${program}
-    
-    mkdir -p ${model_root}/${program}
+
+    [ -z "${DEBUG}" ] || echo "Copying ${etc_from} to ${etc_to}"
+    mkdir -p ${etc_to}
     cp -r ${etc_from} ${etc_to}
 }
 
