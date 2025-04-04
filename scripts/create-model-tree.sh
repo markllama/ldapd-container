@@ -80,7 +80,7 @@ function main() {
 	pull_package ${lib_pkg_name} ${PACKAGE_DIR} ${ARCH}
 
 	## unpack library package
-	unpack_package ${BINARY} ${PACKAGE_DIR} ${UNPACK_ROOT}
+	unpack_package ${lib_pkg_name} ${PACKAGE_DIR} ${UNPACK_ROOT}
     done
 
     # Some packages provide more than one library: sort and remove duplicates
@@ -96,7 +96,7 @@ function main() {
     copy_file ${pkg_name} ${binary_path} ${UNPACK_ROOT} ${MODEL_ROOT}
 
     ## Copy DB files and helpers
-    copy_etc ${BINARY} ${pkg_name} ${UNPACK_ROOT} ${MODEL_ROOT}
+    copy_etc ${pkg_name} ${UNPACK_ROOT} ${MODEL_ROOT}
 
     ## for each library
     [ -z "${DEBUG}" ] || echo "library records: ${library_records[@]}" >&2
@@ -235,17 +235,14 @@ function find_library_package() {
 # They are all in the `schema` directory of the openldap-servers package
 #
 function copy_etc() {
-    local program=$1
-    local package=$2
-    local unpack_root=$3
-    local model_root=$4
+    local package=$1
+    local unpack_root=$2
+    local model_root=$3
 
-    local etc_from=${unpack_root}/${package}/etc
-    local etc_to=${model_root}/${program}
+    local etc_dir=${unpack_root}/${package}/etc
 
-    [ -z "${DEBUG}" ] || echo "Copying ${etc_from} to ${etc_to}"
-    mkdir -p ${etc_to}
-    cp -r ${etc_from} ${etc_to}
+    mkdir -p ${model_root}/${etc_dir}
+    cp -r ${etc_dir}/* ${model_root}/${etc_dir}
 }
 
 # ==========================================================================
