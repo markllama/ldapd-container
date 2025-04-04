@@ -239,8 +239,11 @@ function copy_etc() {
     local unpack_root=$2
     local model_root=$3
 
+    local etc_from=${unpack_root}/${package}/etc
+    local etc_to=${model_root}/${program}
+    
     mkdir -p ${model_root}/${program}
-    cp -r ${unpack_root}/${package}/etc ${model_root}/${program}
+    cp -r ${etc_from} ${etc_to}
 }
 
 # ==========================================================================
