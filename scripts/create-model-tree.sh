@@ -80,7 +80,7 @@ function main() {
 	pull_package ${lib_pkg_name} ${PACKAGE_DIR} ${ARCH}
 
 	## unpack library package
-	unpack_package ${lib_pkg_name} ${PACKAGE_DIR} ${UNPACK_ROOT}
+	unpack_package ${BINARY} ${PACKAGE_DIR} ${UNPACK_ROOT}
     done
 
     # Some packages provide more than one library: sort and remove duplicates
@@ -235,12 +235,12 @@ function find_library_package() {
 # They are all in the `schema` directory of the openldap-servers package
 #
 function copy_etc() {
-    local package=$1
+    local program=$1
     local unpack_root=$2
     local model_root=$3
 
-    mkdir -p ${model_root}/${package}
-    cp -r ${unpack_root}/${package}/etc ${model_root}/${package}
+    mkdir -p ${model_root}/${program}
+    cp -r ${unpack_root}/${package}/etc ${model_root}/${program}
 }
 
 # ==========================================================================
