@@ -96,7 +96,7 @@ function main() {
     copy_file ${pkg_name} ${binary_path} ${UNPACK_ROOT} ${MODEL_ROOT}
 
     ## Copy DB files and helpers
-    copy_etc ${pkg_name} ${UNPACK_ROOT} ${MODEL_ROOT}
+    copy_etc ${BINARY} ${UNPACK_ROOT} ${MODEL_ROOT}
 
     ## for each library
     [ -z "${DEBUG}" ] || echo "library records: ${library_records[@]}" >&2
