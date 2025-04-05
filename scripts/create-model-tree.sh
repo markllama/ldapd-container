@@ -96,7 +96,7 @@ function main() {
     copy_file ${pkg_name} ${binary_path} ${UNPACK_ROOT} ${MODEL_ROOT}
 
     ## Copy DB files and helpers
-    copy_etc ${pkg_name} ${UNPACK_ROOT} ${MODEL_ROOT}
+    #copy_etc ${pkg_name} ${UNPACK_ROOT} ${MODEL_ROOT}
 
     ## for each library
     [ -z "${DEBUG}" ] || echo "library records: ${library_records[@]}" >&2
@@ -239,10 +239,11 @@ function copy_etc() {
     local unpack_root=$2
     local model_root=$3
 
-    local etc_dir=${unpack_root}/${package}/etc
+    local etc_src=${unpack_root}/${package}/etc
 
-    mkdir -p ${model_root}/${etc_dir}
-    cp -r ${etc_dir}/* ${model_root}/${etc_dir}
+    [ -z "${DEBUG}" ] || echo "DEBUG: copy etc dir ${etc_src} to ${model_root}"
+    mkdir -p ${model_root}
+    cp -r ${etc_src} ${model_root}
 }
 
 # ==========================================================================
