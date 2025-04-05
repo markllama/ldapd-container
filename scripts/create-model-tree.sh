@@ -246,6 +246,13 @@ function copy_etc() {
     cp -r ${etc_src} ${model_root}
 }
 
+function initialize_etc() {
+    local model_root=$1
+
+    mkdir -p ${model_root}/etc/openldap/slapd.d
+}
+
+
 # ==========================================================================
 # Functions to build the model tree
 # ==========================================================================
