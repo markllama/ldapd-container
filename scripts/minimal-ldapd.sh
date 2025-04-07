@@ -42,8 +42,8 @@ function main() {
 	
 	# add a volume to include the configuration file
 	# Leave the files in the default locations 
-	# - buildah config --volume /etc/dhcp/dhcpd.conf $container
-	# - buildah config --volume /var/lib/dhcpd $container
+	buildah config --volume /etc/openldap/slapd.d $container
+	buildah config --volume /var/lib/ldap $container
 
 	# # open ports for listening
 	buildah config --port 389/tcp ${container}
