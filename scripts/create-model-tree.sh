@@ -95,6 +95,10 @@ function main() {
     ## copy daemon binary
     copy_file ${pkg_name} ${binary_path} ${UNPACK_ROOT} ${MODEL_ROOT}
 
+    ## copy symlinks to the binary
+    copy_symlinks ${pkg_name} ${binary_path} ${UNPACK_ROOT} ${MODEL_ROOT}
+
+    exit 2
     ## Copy DB files and helpers
     #copy_etc ${pkg_name} ${UNPACK_ROOT} ${MODEL_ROOT}
 
@@ -319,6 +323,31 @@ function copy_file() {
     cp $src_file $dst_dir
 }
 
+function copy_symlinks() {
+    local pkg_name=$1
+    local file_name=$2
+    local src_root=$3
+    local dst_root=$4
+    
+    #[ -z "${DEBUG}" ] || echo "pkg_name = ${pkg_name}"
+    #[ -z "${DEBUG}" ] || echo "file_name = ${file_name}"
+    #[ -z "${DEBUG}" ] || echo "src_root = ${src_root}"
+    #[ -z "${DEBUG}" ] || echo "dst_root = ${dst_root}"
+
+    # Find any symlinks in the same directory as the binary
+    local search_dir=$(dirname ${file_name} | sed 's|^/||')
+    local binary=$(basename ${file_name})
+    [ -z "${DEBUG}" ] || echo "search_dir = ${search_dir}"
+    [ -z "${DEBUG}" ] || echo "binary = ${binary}"
+
+    local links=($(cd ${src_root}/${pkg_name} ; find ${search_dir} -type l | xargs ls -l | sed -E 's/.* (\S+) -> (\w+)/\1/'))
+    [ -z "${DEBUG}" ] || echo "links = ${links[@]}"
+
+    local link
+    for link in ${links[@]} ; do
+	ln -s ${binary} ${dst_root}/${link}
+    done
+}
 # =======================================================================
 # Call MAIN after all functions are defined
 # =======================================================================
