@@ -94,9 +94,15 @@ function main() {
 
     ## copy symlinks to the binary
     #copy_symlinks ${pkg_name} ${binary_path} ${UNPACK_ROOT} ${MODEL_ROOT}
+    mkdir -p ${MODEL_ROOT}/usr/lib
+    mkdir -p ${MODEL_ROOT}/usr/lib64
+    mkdir -p ${MODEL_ROOT}/usr/share
 
     cp -r ${UNPACK_ROOT}/${pkg_name}/etc ${MODEL_ROOT}
+    cp -r ${UNPACK_ROOT}/${pkg_name}/usr/lib64/openldap ${MODEL_ROOT}/usr/lib64
+    cp -r ${UNPACK_ROOT}/${pkg_name}/usr/libexec ${MODEL_ROOT}/usr
     cp -r ${UNPACK_ROOT}/${pkg_name}/var ${MODEL_ROOT}
+    cp -r ${UNPACK_ROOT}/${pkg_name}/usr/share/openldap-servers ${MODEL_ROOT}/usr/share
 
     ## Copy DB files and helpers
     #copy_etc ${pkg_name} ${UNPACK_ROOT} ${MODEL_ROOT}
