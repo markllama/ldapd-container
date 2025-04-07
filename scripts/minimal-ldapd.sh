@@ -43,6 +43,7 @@ function main() {
 	# add a volume to include the configuration file
 	# Leave the files in the default locations 
 	buildah config --volume /etc/openldap/slapd.d $container
+	buildah config --volume /etc/pki/tls $container
 	buildah config --volume /var/lib/ldap $container
 
 	# # open ports for listening

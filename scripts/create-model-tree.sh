@@ -103,6 +103,7 @@ function main() {
     cp -r ${UNPACK_ROOT}/${pkg_name}/usr/libexec ${MODEL_ROOT}/usr
     cp -r ${UNPACK_ROOT}/${pkg_name}/var ${MODEL_ROOT}
     cp -r ${UNPACK_ROOT}/${pkg_name}/usr/share/openldap-servers ${MODEL_ROOT}/usr/share
+    mkdir -p ${MODEL_ROOT}/etc/pki/tls
 
     ## Copy DB files and helpers
     #copy_etc ${pkg_name} ${UNPACK_ROOT} ${MODEL_ROOT}
