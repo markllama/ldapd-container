@@ -6,6 +6,7 @@ DEFAULT_HOST_DB_DIR=./test/ldap
 : HOST_DB_DIR=${HOST_DB_DIR:=${DEFAULT_HOST_DB_DIR}}
 
 podman run --name slapd -d  \
+       --privileged --network=host --port 389/tcp
        -v ${HOST_CONF_DIR}:/etc/openldap/slapd.d:rw,Z \
        -v ${HOST_DB_DIR}:/var/lib/ldap:rw,Z \
        localhost/slapd
