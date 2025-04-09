@@ -1,0 +1,7 @@
+---
+ldap:
+  admin:
+    username: admin
+    password: '{SSHA}GhgmHe84PuMp7dRPQyzNo2vLUCDB+Na5'
+  domain: lamourine.org
+  hostname: ldap

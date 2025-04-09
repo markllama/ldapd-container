@@ -1,0 +1,16 @@
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {{ ldap.admin.password }}
+
+dn: olcDatabase={2}bdb,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {{ ldap.admin.password }}
+-
+replace: olcRootDN
+#olcRootDN: cn={{ ldap.admin.username }},dc={{ ldap.domain.split('.') | join(',dc=') }}
+olcRootDN: cn={{ ldap.admin.username }},dc={{ ldap.domain.split('.') | join(',dc=') }}
+-
+replace: olcSuffix
+olcSuffix: dc={{ ldap.hostname }},dc={{ ldap.domain.split('.') | join(',dc=') }}
