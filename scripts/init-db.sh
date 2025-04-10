@@ -15,7 +15,7 @@ mkdir -p ${HOST_DB_DIR}
 podman run --name slapd-init --rm \
        -v ${HOST_CONF_DIR}:/etc/openldap/slapd.d:rw,Z \
        -v ${HOST_DB_DIR}:/var/lib/ldap:rw,Z \
-       localhost/slapd \
+       ${SLAPD_IMAGE} \
        /usr/sbin/slapd -T add -n0 \
        -l ${INIT_LDIF} \
        -F /etc/openldap/slapd.d/
