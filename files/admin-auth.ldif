@@ -1,0 +1,16 @@
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}ja+SQVkP2HVOMIp/xiLfJgxP+7k7x0fz
+
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}ja+SQVkP2HVOMIp/xiLfJgxP+7k7x0fz
+-
+replace: olcRootDN
+#olcRootDN: cn=admin,dc=lamourine,dc=org
+olcRootDN: cn=admin,dc=lamourine,dc=org
+-
+replace: olcSuffix
+olcSuffix: dc=ldap,dc=lamourine,dc=org
