@@ -50,7 +50,7 @@ function main() {
 	buildah config --port 389/tcp ${container}
 
 	# # Define the startup command
-	buildah config --entrypoint [ '/usr/sbin/slapd', '-d', 'config,stats' ] $container
+	buildah config --entrypoint '/usr/sbin/slapd -d config,stats' $container
 	buildah config --cmd '-h "ldap:/// ldaps:/// ldapi:///"' $container
 
 	buildah config --author "${AUTHOR}" $container
