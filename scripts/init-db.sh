@@ -1,7 +1,7 @@
 #!/bin/sh
 DEFAULT_SLAPD_IMAGE=quay.io/markllama/slapd
-DEFAULT_HOST_CONF_DIR=/etc/openldap/slapd.d
-DEFAULT_HOST_DB_DIR=/var/lib/ldap
+DEFAULT_HOST_CONF_DIR=./test/slapd.d
+DEFAULT_HOST_DB_DIR=./test/ldap
 DEFAULT_INIT_LDIF=/usr/share/openldap-servers/slapd.ldif
 
 : SLAPD_IMAGE=${SLAPD_IMAGE:=${DEFAULT_SLAPD_IMAGE}}
