@@ -1,0 +1,11 @@
+= OpenLDAP `slapd` container service
+
+== Setup
+
+----
+mkdir -p /etc/openldap/slapd.d
+mkdir -p /var/lib/ldap
+
+----
+
+== Build

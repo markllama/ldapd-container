@@ -1,0 +1,32 @@
+[Unit]
+Description=OoenLDAP slapd daemon Service Container
+After=network-online.target
+
+[Container]
+Image=quay.io/markllama/slapd:latest
+
+Environment=LDAP_URLS="ldap:/// ldaps:/// ldapi:///"
+EnvironmentFile=/etc/sysconfig/slapd
+
+PodmanArgs=--privileged
+Network=host
+
+# Open listening ports
+# bootps
+PublishPort=389:389/tcp
+
+# Mount the openldap config dir into the container workingdir
+Volume=/etc/openldap/slapd.d:/etc/openldap/slapd.d:ro,Z
+Volume=/var/lib/ldap/:/var/lib/ldap/:rw,Z
+
+[Install]
+# Enable in multi-user boot
+WantedBy=multi-user.target default.target
+Alias=openldap.service
+
+#  podman run --detach --name slapd \
+#    --privileged  \
+#    --network host \
+#    --volume /etc/openldap/slapd.d:/etc/openldap/slapd.d:ro,Z \
+#    --volume /var/lib/ldap/:/var/lib/ldap/:rw,Z \
+#    quay.io/markllama/slapd
